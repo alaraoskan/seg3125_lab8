@@ -1,0 +1,11 @@
+export { default as Navigation } from "./Navigation";
+export { default as Footer } from "./Footer";
+export { default as Home } from "./Home";
+export { default as Top10 } from "./Top10";
+export { default as Ratings } from "./Ratings";
+export { default as NotFoundPage } from "./NotFoundPage";
+export { default as Discover } from "./Discover";
+export { default as LogIn } from "./LogIn";
+export { default as LoggedIn } from "./LoggedIn";
+// export { default as Search } from "./Search";
+export { default as PopupExample } from "./PopupExample";
