@@ -1,4 +1,34 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+import Popup from "reactjs-popup";
+
+function handleSubmit(event) {
+  event.preventDefault();
+  var name =  document.getElementById("name");
+  var comment =  document.getElementById("comment");
+  if (name.value === "" || comment.value === ""){
+  alert("Review failed!")
+}
+else {
+  alert("Review submitted!");
+  name.value="";
+  comment.value="";}
+}
+const lila = "#9C55FC";
+const PopupExample = () => (
+  <Popup trigger={<Button className="" style={{backgroundColor: lila}}>Review</Button>} position="right center">
+   <div class="card-body bg-info">
+    <form onSubmit={handleSubmit}>
+              <label for="name" className="text-white">Name:</label>
+              <input data-toggle="tooltip" data-placement="top" title="Enter your name!" class="form-control" type="text" id="name" name="number"/><br/>
+              <label for="review" className="text-white">Review:</label>
+              <input class="form-control" data-toggle="tooltip" data-placement="top" title="Enter your comments" type="text" id="comment"/><br/>
+              <Button block variant="outline-primary text-white" className="btn" style={{backgroundColor: lila}} type="submit">Submit</Button>
+              </form>
+            </div>
+
+  </Popup>
+);
 
 class Top10 extends React.Component {
   state = {
@@ -17,20 +47,20 @@ class Top10 extends React.Component {
   }
 
   mov = this.state.films.map(film => {
-    return (
-      <div className="container bg-light" key={film.id}>
-        <div className="card bg-info" style={{"text-align":"center"}}>
-          <img className="card-img-top" src={require('./img/'+film.name+'.jpg')} height="375px" width="250px" alt="Card image cap"/>
-          <div className="card-body">
-            <h4 className="card-title"><strong>{film.id}. {film.name}</strong></h4>
+      return (
+        <div className="container h-auto w-50" key={film.id}>
+        <div className="card bg-primary" style={{"textAlign":"center"}}>
+          <img className="card-img-top" src={require('./img/'+film.name+'.jpg')} height="auto" width="auto" alt="Card image cap"/>
+          <div className="card-body text-white">
+            <h4 className="card-title"><strong>{film.name}</strong></h4>
             <h5>Year: {film.release}</h5>
             <h5>Rating: {film.rating} &#9733;</h5>
             <p className="card-text">{film.storyline}</p>
-            <a href="#" className="btn btn-primary">Review</a><br/><br/>
+            <PopupExample /><br/><br/>
           </div>
         </div><br/>
       </div>
-    )
+      )
   })
 
 

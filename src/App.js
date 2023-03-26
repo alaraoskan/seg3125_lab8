@@ -3,6 +3,7 @@ import './App.css';
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link, withRouter } from "react-router-dom";
 import { Navigation, Footer, Home, Top10, Ratings, NotFoundPage } from "./components";
+import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
   return (
     <div className="App">
