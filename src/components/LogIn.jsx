@@ -1,11 +1,29 @@
 import React, { useState } from "react";
 import { Button, Form, Col, Row, Alert } from "react-bootstrap";
 
+const translations = {
+  en: {
+    title: "Log in to your account",
+    email: "Email",
+    password: "Password",
+    submitBtn: "Log in",
+    error: "Invalid email or password.",
+  },
+  fr: {
+    title: "Connectez-vous à votre compte",
+    email: "Adresse email",
+    password: "Mot de passe",
+    submitBtn: "Se connecter",
+    error: "Adresse email ou mot de passe invalide.",
+  },
+};
+
 export default function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [validated, setValidated] = useState(false);
   const [error, setError] = useState(null);
+  const [language, setLanguage] = useState("en");
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -21,18 +39,18 @@ export default function LogIn() {
         alert("Login successful!");
       } else {
         // Login failed
-        setError("Invalid email or password.");
+        setError(translations[language].error);
       }
     }
   }
 
   return (
     <div className="login-container">
-      <h2 className="text-center mb-4">Log in to your account</h2>
+      <h2 className="text-center mb-4">{translations[language].title}</h2>
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
         <Form.Group as={Row} controlId="email">
           <Form.Label column sm={3}>
-            Email
+            {translations[language].email}
           </Form.Label>
           <Col sm={9}>
             <Form.Control
@@ -40,14 +58,14 @@ export default function LogIn() {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
+              placeholder={translations[language].email}
             />
           </Col>
         </Form.Group>
 
         <Form.Group as={Row} controlId="password">
           <Form.Label column sm={3}>
-            Password
+            {translations[language].password}
           </Form.Label>
           <Col sm={9}>
             <Form.Control
@@ -55,7 +73,7 @@ export default function LogIn() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter your password"
+              placeholder={translations[language].password}
             />
           </Col>
         </Form.Group>
@@ -73,10 +91,27 @@ export default function LogIn() {
             className="my-4"
             style={{ backgroundColor: "#009688", borderColor: "#009688" }}
           >
-            Log in
+            {translations[language].submitBtn}
           </Button>
         </div>
       </Form>
+
+      <div className="text-center">
+        <Button
+          variant="link"
+          onClick={() => setLanguage("en")}
+          className={`mx-2 ${language === "en" && "active"}`}
+        >
+          English
+        </Button>
+        <Button
+          variant="link"
+          onClick={() => setLanguage("fr")}
+          className={`mx-2 ${language === "fr" && "active"}`}
+        >
+          Français
+        </Button>
+      </div>
     </div>
   );
 }
